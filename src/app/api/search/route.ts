@@ -9,7 +9,7 @@ export async function GET(request: Request) {
 
   try {
     const results = await yahooFinance.search(q);
-    return NextResponse.json(results.quotes || []);
+    return NextResponse.json((results as any).quotes || []);
   } catch (error) {
     console.error("Error searching via yahoo-finance2", error);
     return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });

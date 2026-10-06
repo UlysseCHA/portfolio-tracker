@@ -48,7 +48,7 @@ export default function PortfolioChart({ data }: { data: any[] }) {
           />
           <Tooltip 
             contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-            formatter={(value: number) => [value.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }), 'Valeur']}
+            formatter={(value: any) => [Number(value).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }), 'Valeur']}
             labelFormatter={(label) => `Date: ${label}`}
           />
           <Area type="monotone" dataKey="value" stroke="#2563eb" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
