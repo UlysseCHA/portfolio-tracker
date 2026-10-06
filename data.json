@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1791308271587",
+    "type": "BUY",
+    "date": "2026-10-06",
+    "ticker": "IOVA",
+    "shares": 9.14,
+    "price": 13.32,
+    "currency": "USD"
+  },
+  {
+    "type": "BUY",
+    "date": "2026-10-06",
+    "ticker": "LPTH",
+    "shares": 53.5,
+    "price": 10.8808,
+    "currency": "USD",
+    "id": "1791308313877"
+  },
+  {
+    "type": "BUY",
+    "date": "2026-10-05",
+    "ticker": "RWL",
+    "shares": 5.6,
+    "price": 130.06,
+    "currency": "USD",
+    "id": "1791308339553"
+  },
+  {
+    "type": "BUY",
+    "date": "2026-10-05",
+    "ticker": "SOXX",
+    "shares": 1.75,
+    "price": 586.863,
+    "currency": "USD",
+    "id": "1791308370508"
+  },
+  {
+    "type": "BUY",
+    "date": "2026-10-05",
+    "ticker": "CEG",
+    "shares": 4.53,
+    "price": 260.223,
+    "currency": "USD",
+    "id": "1791308417509"
+  }
+]
