@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import yahooFinance from 'yahoo-finance2';
+import { Redis } from '@upstash/redis';
 
 export const dynamic = 'force-dynamic';
 
-const dataFilePath = path.join(process.cwd(), 'data.json');
+const redis = new Redis({
+  url: process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '',
+  token: process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '',
+});
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -22,12 +23,16 @@ export async function GET(request: Request) {
   const yahooRange = rangeMap[range] || '1mo';
   const interval = ['1d', '5d'].includes(yahooRange) ? '5m' : '1d';
 
-  if (!fs.existsSync(dataFilePath)) {
-    return NextResponse.json({ portfolio: [], summary: { totalInvested: 0, currentValue: 0, totalGain: 0, totalGainPercent: 0 } });
+  let transactions: any[] = [];
+  try {
+    transactions = (await redis.get('transactions')) || [];
+  } catch (err) {
+    console.error("Error reading from Redis", err);
   }
 
-  const fileContents = fs.readFileSync(dataFilePath, 'utf8');
-  const transactions = JSON.parse(fileContents);
+  if (!transactions || transactions.length === 0) {
+    return NextResponse.json({ portfolio: [], summary: { totalInvested: 0, currentValue: 0, totalGain: 0, totalGainPercent: 0 } });
+  }
 
   let cashDeposited = 0;
   let cashWithdrawn = 0;
